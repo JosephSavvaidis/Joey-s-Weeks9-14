@@ -2,22 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     public SpriteRenderer player;
     public SpriteRenderer fireBall;
 
-    public TextMeshProUGUI parryButton;
+    public Button parryButton;
 
     private bool canHit;
     private int health;
     public bool canCanHit;
+
+    public Animator healthAnim;
+    public Animator playerAnim;
     // Start is called before the first frame update
     void Start()
     {
         health = 3;
-        
+        canCanHit = true;
     }
 
     // Update is called once per frame
@@ -30,9 +34,12 @@ public class PlayerController : MonoBehaviour
                 
                     health -= 1;
                     canHit = false;
+                playerAnim.SetInteger("State", 1);
+                
                     Debug.Log(health);
                 
             }
+            healthAnim.SetInteger("Health", health);
         }
         else
         {
@@ -46,11 +53,17 @@ public class PlayerController : MonoBehaviour
         canCanHit = false;
         StartCoroutine(AbleToPressButton());
     }
-    IEnumerator AbleToPressButton()
+    public IEnumerator AbleToPressButton()
     {
+        playerAnim.SetBool("Dodge", true);
         parryButton.enabled = false;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.8f);
         canCanHit = true;
+        playerAnim.SetBool("Dodge", false);
+        yield return new WaitForSeconds(0.7f);
         parryButton.enabled = true;
+        
+
     }
+    
 }
