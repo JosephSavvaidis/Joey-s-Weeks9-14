@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     {
         // Listen to Fireball events (scoreCollect)
         fb.scoreCollect.AddListener(PlayFire);
-        fb.scoreCollect.AddListener(StopAblePressCoolDown);
+        //fb.scoreCollect.AddListener(StopAblePressCoolDown);
 
         // Initialize health
         health = 3;
@@ -96,12 +96,7 @@ public class PlayerController : MonoBehaviour
     {
         // Start the parry cooldown routine
         StartCoroutine(AbleToPressButton());
-        // Allow hits again
-        canCanHit = true;
-        // End dodge animation
-        playerAnim.SetBool("Dodge", false);
-        // Reactivate parry button
-        parryButton.enabled = true;
+        
     }
 
     // Handles timing around the parry action
