@@ -86,6 +86,9 @@ public class PlayerController : MonoBehaviour
     public void StopAblePressCoolDown()
     {
         StopCoroutine(AbleToPressButton());
+        canCanHit = true;
+        parryButton.enabled = true;
+        playerAnim.SetBool("Dodge", false);
     }
 
     // Called when the Parry button is pressed
